@@ -66,33 +66,33 @@ int main() {
             // term2: exp(-rho1.^2 ./ (w1).^2)  Gaussian term for beam profile
             double complex term2 = exp(-rho1[r][c] * rho1[r][c] / (w1[r][c] * w1[r][c]));
 
-            // term3: exp(-1i * 2 * pi / wL * z1 * rho1.^2 / (2 * (z1.^2 + zR.^2)))  FIXME Phase shift due to propagation and curvature
+            // term3: exp(-1i * 2 * pi / wL * z1 * rho1.^2 / (2 * (z1.^2 + zR.^2))) Phase shift due to propagation and curvature
             // correct value [0, 0] = -0.959673423207204 - 0.281117272307781i
             double complex term3 = cexp(-I * 2 * M_PI / wL * z1[r][c] * (rho1[r][c] * rho1[r][c]) / (2 * (z1[r][c] * z1[r][c] + zR * zR)));
 
             // term4: exp(1i * atan(z1/zR))
-            double complex term4 = exp(I * atan(z1[r][c] / zR));
+            double complex term4 = cexp(I * atan(z1[r][c] / zR));
 
             // term5: (rho1 * sqrt(2) ./ w1).^m1
             double complex term5 = cpow(rho1[r][c] * sqrt(2) / w1[r][c], m1);
 
             // term6: exp(1i * m1 * phi1)
-            double complex term6 = exp(I * m1 * phi1[r][c]);
+            double complex term6 = cexp(I * m1 * phi1[r][c]);
 
             // term7: exp(1i * m1 * atan(z1/zR))
-            double complex term7 = exp(I * m1 * atan(z1[r][c] / zR));
+            double complex term7 = cexp(I * m1 * atan(z1[r][c] / zR));
 
             // term8: exp(1i * 2 * pi / wL * xp * sin(thetaX1))
-            double complex term8 = exp(I * 2 * M_PI / wL * xp[r][c] * sin(thetaX1));
+            double complex term8 = cexp(I * 2 * M_PI / wL * xp[r][c] * sin(thetaX1));
 
             // term9: exp(-1i * k * zp)
-            double complex term9 = exp(-I * k * zp[r][c]);
+            double complex term9 = cexp(-I * k * zp[r][c]);
 
             // Combine all terms to calculate E
             E[r][c] = term1 * term2 * term3 * term4 * term5 * term6 * term7 * term8 * term9;
 
             // Print the result (real and imaginary parts)
-            printf("E[%d][%d] = %e + %ei\n", r, c, creal(E[r][c]), cimag(E[r][c]));
+//            printf("E[%d][%d] = %e + %ei\n", r, c, creal(E[r][c]), cimag(E[r][c]));
         }
 
         /**
