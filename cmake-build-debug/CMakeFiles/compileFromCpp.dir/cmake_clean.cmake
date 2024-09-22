@@ -1,4 +1,5 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/compileFromCpp.dir/TestEFunction.c.obj"
   "CMakeFiles/compileFromCpp.dir/double_slit2_FFT_tri.c.obj"
   "compileFromCpp.exe"
   "compileFromCpp.exe.manifest"

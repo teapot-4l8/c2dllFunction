@@ -59,25 +59,48 @@ int main() {
             phi1[r][c] = atan2(yp[r][c], xp[r][c]);
             rho1[r][c] = sqrt((xp[r][c] * cos(thetaX1)) * (xp[r][c] * cos(thetaX1)) + yp[r][c] * yp[r][c]);
 
-            // Now calculate E using the formula provided
+
+            // term1: w0 ./ w1  Calculate the beam waist scaling
             double complex term1 = w0 / w1[r][c];
+
+            // term2: exp(-rho1.^2 ./ (w1).^2)  Gaussian term for beam profile
             double complex term2 = exp(-rho1[r][c] * rho1[r][c] / (w1[r][c] * w1[r][c]));
-            double complex term3 = exp(-I * 2 * M_PI / wL * z1[r][c] * rho1[r][c] * rho1[r][c] / 2 / (z1[r][c] * z1[r][c] + zR * zR));
+
+            // term3: exp(-1i * 2 * pi / wL * z1 * rho1.^2 / (2 * (z1.^2 + zR.^2)))  FIXME Phase shift due to propagation and curvature
+            // correct value [0, 0] = -0.959673423207204 - 0.281117272307781i
+            double complex term3 = cexp(-I * 2 * M_PI / wL * z1[r][c] * (rho1[r][c] * rho1[r][c]) / (2 * (z1[r][c] * z1[r][c] + zR * zR)));
+
+            // term4: exp(1i * atan(z1/zR))
             double complex term4 = exp(I * atan(z1[r][c] / zR));
+
+            // term5: (rho1 * sqrt(2) ./ w1).^m1
             double complex term5 = cpow(rho1[r][c] * sqrt(2) / w1[r][c], m1);
+
+            // term6: exp(1i * m1 * phi1)
             double complex term6 = exp(I * m1 * phi1[r][c]);
+
+            // term7: exp(1i * m1 * atan(z1/zR))
             double complex term7 = exp(I * m1 * atan(z1[r][c] / zR));
+
+            // term8: exp(1i * 2 * pi / wL * xp * sin(thetaX1))
             double complex term8 = exp(I * 2 * M_PI / wL * xp[r][c] * sin(thetaX1));
+
+            // term9: exp(-1i * k * zp)
             double complex term9 = exp(-I * k * zp[r][c]);
 
             // Combine all terms to calculate E
             E[r][c] = term1 * term2 * term3 * term4 * term5 * term6 * term7 * term8 * term9;
 
-
+            // Print the result (real and imaginary parts)
+            printf("E[%d][%d] = %e + %ei\n", r, c, creal(E[r][c]), cimag(E[r][c]));
         }
-        // Print the result (real and imaginary parts)
-        printf("E[%d][%d] = %e + %ei\n", r, 0, creal(E[r][0]), cimag(E[r][0]));
-//        printf("E[%d][%d] = %e + %ei\n", r, 0, creal(E[r][0]), cimag(E[r][0]));
+
+        /**
+        printf("z1[%d][%d] = %e\n", r, 0, z1[r][0]);
+        printf("w1[%d][%d] = %e\n", r, 11, w1[r][11]);
+        printf("phi1[%d][%d] = %e\n", r, 11, phi1[r][11]);
+        printf("rho1[%d][%d] = %e\n", r, 0, rho1[r][0]);
+        **/
     }
 
     // Remember to free the allocated memory when done
@@ -92,3 +115,5 @@ int main() {
 
     return 0;
 }
+
+

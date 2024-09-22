@@ -80,6 +80,9 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="D:/unityProject/PhysicsPrj/Assets/compileFromCpp/TestEFunction.c">
+			<Option target="compileFromCpp"/>
+		</Unit>
 		<Unit filename="D:/unityProject/PhysicsPrj/Assets/compileFromCpp/double_slit2_FFT_tri.c">
 			<Option target="compileFromCpp"/>
 		</Unit>

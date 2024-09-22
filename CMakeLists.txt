@@ -5,4 +5,4 @@ set(CMAKE_CXX_STANDARD 14)
 
 add_executable(compileFromCpp
         double_slit2_FFT_tri.c
-        )
+        TestEFunction.c)

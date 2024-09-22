@@ -73,12 +73,12 @@ clean: CMakeFiles/compileFromCpp.dir/clean
 CMakeFiles/compileFromCpp.dir/all:
 	$(MAKE) -f CMakeFiles\compileFromCpp.dir\build.make CMakeFiles/compileFromCpp.dir/depend
 	$(MAKE) -f CMakeFiles\compileFromCpp.dir\build.make CMakeFiles/compileFromCpp.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=D:\unityProject\PhysicsPrj\Assets\compileFromCpp\cmake-build-debug\CMakeFiles --progress-num=1,2 "Built target compileFromCpp"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=D:\unityProject\PhysicsPrj\Assets\compileFromCpp\cmake-build-debug\CMakeFiles --progress-num=1,2,3 "Built target compileFromCpp"
 .PHONY : CMakeFiles/compileFromCpp.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/compileFromCpp.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start D:\unityProject\PhysicsPrj\Assets\compileFromCpp\cmake-build-debug\CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start D:\unityProject\PhysicsPrj\Assets\compileFromCpp\cmake-build-debug\CMakeFiles 3
 	$(MAKE) -f CMakeFiles\Makefile2 CMakeFiles/compileFromCpp.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start D:\unityProject\PhysicsPrj\Assets\compileFromCpp\cmake-build-debug\CMakeFiles 0
 .PHONY : CMakeFiles/compileFromCpp.dir/rule

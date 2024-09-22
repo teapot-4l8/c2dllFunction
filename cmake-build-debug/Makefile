@@ -122,6 +122,33 @@ compileFromCpp/fast:
 	$(MAKE) -f CMakeFiles\compileFromCpp.dir\build.make CMakeFiles/compileFromCpp.dir/build
 .PHONY : compileFromCpp/fast
 
+TestEFunction.obj: TestEFunction.c.obj
+
+.PHONY : TestEFunction.obj
+
+# target to build an object file
+TestEFunction.c.obj:
+	$(MAKE) -f CMakeFiles\compileFromCpp.dir\build.make CMakeFiles/compileFromCpp.dir/TestEFunction.c.obj
+.PHONY : TestEFunction.c.obj
+
+TestEFunction.i: TestEFunction.c.i
+
+.PHONY : TestEFunction.i
+
+# target to preprocess a source file
+TestEFunction.c.i:
+	$(MAKE) -f CMakeFiles\compileFromCpp.dir\build.make CMakeFiles/compileFromCpp.dir/TestEFunction.c.i
+.PHONY : TestEFunction.c.i
+
+TestEFunction.s: TestEFunction.c.s
+
+.PHONY : TestEFunction.s
+
+# target to generate assembly for a file
+TestEFunction.c.s:
+	$(MAKE) -f CMakeFiles\compileFromCpp.dir\build.make CMakeFiles/compileFromCpp.dir/TestEFunction.c.s
+.PHONY : TestEFunction.c.s
+
 double_slit2_FFT_tri.obj: double_slit2_FFT_tri.c.obj
 
 .PHONY : double_slit2_FFT_tri.obj
@@ -158,6 +185,9 @@ help:
 	@echo ... compileFromCpp
 	@echo ... edit_cache
 	@echo ... rebuild_cache
+	@echo ... TestEFunction.obj
+	@echo ... TestEFunction.i
+	@echo ... TestEFunction.s
 	@echo ... double_slit2_FFT_tri.obj
 	@echo ... double_slit2_FFT_tri.i
 	@echo ... double_slit2_FFT_tri.s
