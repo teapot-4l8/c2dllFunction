@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+D:/unityProject/PhysicsPrj/Assets/compileFromCpp/double_slit2_FFT_tri.c
+stdio.h
+-
+math.h
+-
+stdlib.h
+-
+complex.h
+-
+
