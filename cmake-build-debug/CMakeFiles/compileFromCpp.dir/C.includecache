@@ -6,7 +6,7 @@
 
 #IncludeRegexTransform: 
 
-D:/unityProject/PhysicsPrj/Assets/compileFromCpp/double_slit2_FFT_tri.c
+D:/unityProject/ccompile2dll/c2dllFunction/double_slit2_FFT_tri.c
 stdio.h
 -
 math.h

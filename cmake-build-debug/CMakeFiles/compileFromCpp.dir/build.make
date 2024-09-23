@@ -42,10 +42,10 @@ RM = "D:\JetBrains\CLion 2020.1\bin\cmake\win\bin\cmake.exe" -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = D:\unityProject\PhysicsPrj\Assets\compileFromCpp
+CMAKE_SOURCE_DIR = D:\unityProject\ccompile2dll\c2dllFunction
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = D:\unityProject\PhysicsPrj\Assets\compileFromCpp\cmake-build-debug
+CMAKE_BINARY_DIR = D:\unityProject\ccompile2dll\c2dllFunction\cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/compileFromCpp.dir/depend.make
@@ -58,29 +58,29 @@ include CMakeFiles/compileFromCpp.dir/flags.make
 
 CMakeFiles/compileFromCpp.dir/double_slit2_FFT_tri.c.obj: CMakeFiles/compileFromCpp.dir/flags.make
 CMakeFiles/compileFromCpp.dir/double_slit2_FFT_tri.c.obj: ../double_slit2_FFT_tri.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\unityProject\PhysicsPrj\Assets\compileFromCpp\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/compileFromCpp.dir/double_slit2_FFT_tri.c.obj"
-	D:\Programs\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\compileFromCpp.dir\double_slit2_FFT_tri.c.obj   -c D:\unityProject\PhysicsPrj\Assets\compileFromCpp\double_slit2_FFT_tri.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\unityProject\ccompile2dll\c2dllFunction\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/compileFromCpp.dir/double_slit2_FFT_tri.c.obj"
+	D:\Programs\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\compileFromCpp.dir\double_slit2_FFT_tri.c.obj   -c D:\unityProject\ccompile2dll\c2dllFunction\double_slit2_FFT_tri.c
 
 CMakeFiles/compileFromCpp.dir/double_slit2_FFT_tri.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/compileFromCpp.dir/double_slit2_FFT_tri.c.i"
-	D:\Programs\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E D:\unityProject\PhysicsPrj\Assets\compileFromCpp\double_slit2_FFT_tri.c > CMakeFiles\compileFromCpp.dir\double_slit2_FFT_tri.c.i
+	D:\Programs\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E D:\unityProject\ccompile2dll\c2dllFunction\double_slit2_FFT_tri.c > CMakeFiles\compileFromCpp.dir\double_slit2_FFT_tri.c.i
 
 CMakeFiles/compileFromCpp.dir/double_slit2_FFT_tri.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/compileFromCpp.dir/double_slit2_FFT_tri.c.s"
-	D:\Programs\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S D:\unityProject\PhysicsPrj\Assets\compileFromCpp\double_slit2_FFT_tri.c -o CMakeFiles\compileFromCpp.dir\double_slit2_FFT_tri.c.s
+	D:\Programs\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S D:\unityProject\ccompile2dll\c2dllFunction\double_slit2_FFT_tri.c -o CMakeFiles\compileFromCpp.dir\double_slit2_FFT_tri.c.s
 
 CMakeFiles/compileFromCpp.dir/TestEFunction.c.obj: CMakeFiles/compileFromCpp.dir/flags.make
 CMakeFiles/compileFromCpp.dir/TestEFunction.c.obj: ../TestEFunction.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\unityProject\PhysicsPrj\Assets\compileFromCpp\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/compileFromCpp.dir/TestEFunction.c.obj"
-	D:\Programs\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\compileFromCpp.dir\TestEFunction.c.obj   -c D:\unityProject\PhysicsPrj\Assets\compileFromCpp\TestEFunction.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=D:\unityProject\ccompile2dll\c2dllFunction\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/compileFromCpp.dir/TestEFunction.c.obj"
+	D:\Programs\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles\compileFromCpp.dir\TestEFunction.c.obj   -c D:\unityProject\ccompile2dll\c2dllFunction\TestEFunction.c
 
 CMakeFiles/compileFromCpp.dir/TestEFunction.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/compileFromCpp.dir/TestEFunction.c.i"
-	D:\Programs\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E D:\unityProject\PhysicsPrj\Assets\compileFromCpp\TestEFunction.c > CMakeFiles\compileFromCpp.dir\TestEFunction.c.i
+	D:\Programs\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E D:\unityProject\ccompile2dll\c2dllFunction\TestEFunction.c > CMakeFiles\compileFromCpp.dir\TestEFunction.c.i
 
 CMakeFiles/compileFromCpp.dir/TestEFunction.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/compileFromCpp.dir/TestEFunction.c.s"
-	D:\Programs\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S D:\unityProject\PhysicsPrj\Assets\compileFromCpp\TestEFunction.c -o CMakeFiles\compileFromCpp.dir\TestEFunction.c.s
+	D:\Programs\mingw64\bin\gcc.exe $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S D:\unityProject\ccompile2dll\c2dllFunction\TestEFunction.c -o CMakeFiles\compileFromCpp.dir\TestEFunction.c.s
 
 # Object files for target compileFromCpp
 compileFromCpp_OBJECTS = \
@@ -96,7 +96,7 @@ compileFromCpp.exe: CMakeFiles/compileFromCpp.dir/build.make
 compileFromCpp.exe: CMakeFiles/compileFromCpp.dir/linklibs.rsp
 compileFromCpp.exe: CMakeFiles/compileFromCpp.dir/objects1.rsp
 compileFromCpp.exe: CMakeFiles/compileFromCpp.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=D:\unityProject\PhysicsPrj\Assets\compileFromCpp\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking C executable compileFromCpp.exe"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=D:\unityProject\ccompile2dll\c2dllFunction\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking C executable compileFromCpp.exe"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles\compileFromCpp.dir\link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -109,6 +109,6 @@ CMakeFiles/compileFromCpp.dir/clean:
 .PHONY : CMakeFiles/compileFromCpp.dir/clean
 
 CMakeFiles/compileFromCpp.dir/depend:
-	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" D:\unityProject\PhysicsPrj\Assets\compileFromCpp D:\unityProject\PhysicsPrj\Assets\compileFromCpp D:\unityProject\PhysicsPrj\Assets\compileFromCpp\cmake-build-debug D:\unityProject\PhysicsPrj\Assets\compileFromCpp\cmake-build-debug D:\unityProject\PhysicsPrj\Assets\compileFromCpp\cmake-build-debug\CMakeFiles\compileFromCpp.dir\DependInfo.cmake --color=$(COLOR)
+	$(CMAKE_COMMAND) -E cmake_depends "MinGW Makefiles" D:\unityProject\ccompile2dll\c2dllFunction D:\unityProject\ccompile2dll\c2dllFunction D:\unityProject\ccompile2dll\c2dllFunction\cmake-build-debug D:\unityProject\ccompile2dll\c2dllFunction\cmake-build-debug D:\unityProject\ccompile2dll\c2dllFunction\cmake-build-debug\CMakeFiles\compileFromCpp.dir\DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/compileFromCpp.dir/depend
 
