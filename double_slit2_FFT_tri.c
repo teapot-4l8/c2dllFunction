@@ -12,17 +12,13 @@
 #define pmin -pmax // minimum detector screen coordinate
 #define w0 20e-6   // beam waist
 #define m1 1       // vortex beam indicator (0 for Gaussian, non-zero for vortex)
+#define TRIANGLE_HEIGHT 50  // Height of the triangle
 
-// Helper function to initialize a 2D array dynamically
-double** create_2d_array(int rows, int cols) {
-    double** array = (double**)malloc(rows * sizeof(double*));
-    for (int i = 0; i < rows; i++) {
-        array[i] = (double*)malloc(cols * sizeof(double));
-    }
-    return array;
-}
+double** create_2d_array(int rows, int cols);
 
-void create_slit(double* slit, double triangle_height);
+// Function to calculate and apply the triangular slit mask
+void calculate_triangular_slit(double** slit , double complex E[np][np]);
+
 
 int main() {
     double k = 2 * M_PI / wL;
@@ -32,7 +28,7 @@ int main() {
     double **xp = create_2d_array(np, np);
     double **yp = create_2d_array(np, np);
     double **zp = create_2d_array(np, np);
-
+    double **slit = create_2d_array(np, np);
     // Initialize xp, yp, zp
     for (int c = 0; c < np; c++) {
         double p = pmin + dp * c;
@@ -50,11 +46,10 @@ int main() {
     double rho1[np][np];
     double complex E[np][np]; // To store the result of E (complex)
 
+
     double thetaX1 = atan(S1x / (2 * zSP));
     double zR = M_PI * w0 * w0 / wL;
 
-    double* slit = (double*)malloc(np * np * sizeof(double));
-    double triangle_height = 50.0;
 
     // Compute z1, w1, phi1, rho1, and E values
     for (int r = 0; r < np; r++) {
@@ -85,44 +80,78 @@ int main() {
             // Combine all terms to calculate E
             E[r][c] = term1 * term2 * term3 * term4 * term5 * term6 * term7 * term8 * term9;
         }
-
-
-        create_slit(slit, triangle_height);
-
-        /**
-        printf("z1[%d][%d] = %e\n", r, 0, z1[r][0]);
-        printf("w1[%d][%d] = %e\n", r, 11, w1[r][11]);
-        printf("phi1[%d][%d] = %e\n", r, 11, phi1[r][11]);
-        printf("rho1[%d][%d] = %e\n", r, 0, rho1[r][0]);
-        **/
     }
+
+    calculate_triangular_slit(slit, E);
+
+
+
 
     free(xp);
     free(yp);
     free(zp);
     free(slit);
-
-
     return 0;
 }
 
 
-void calculateE() {
-
+// Helper function to initialize a 2D array dynamically
+double** create_2d_array(int rows, int cols) {
+    double** array = (double**)malloc(rows * sizeof(double*));
+    for (int i = 0; i < rows; i++) {
+        array[i] = (double*)malloc(cols * sizeof(double));
+    }
+    return array;
 }
 
-void create_slit(double* slit, double triangle_height) {
-    // Initialize the slit array (setting all elements to zero)
-    for (int i = 0; i < np * np; i++) {
-        slit[i] = 0;
-    }
-    // Define the center of the slit
+// Function to calculate and apply the triangular slit mask
+void calculate_triangular_slit(double** slit , double complex E[np][np]) {
     double center_x = np / 2.0;
     double center_y = np / 2.0;
 
-    // Calculate the vertices of the triangle
-    double vertex1[2] = {center_x, center_y - 2.0 / 3.0 * triangle_height};
-    double vertex2[2] = {center_x + triangle_height / sqrt(3), center_y + 1.0 / 3.0 * triangle_height};
-    double vertex3[2] = {center_x - triangle_height / sqrt(3), center_y + 1.0 / 3.0 * triangle_height};
-}
+    double vertex1[2] = {center_x, center_y - 2.0 / 3.0 * TRIANGLE_HEIGHT};
+    double vertex2[2] = {center_x + TRIANGLE_HEIGHT / sqrt(3), center_y + 1.0 / 3.0 * TRIANGLE_HEIGHT};
+    double vertex3[2] = {center_x - TRIANGLE_HEIGHT / sqrt(3), center_y + 1.0 / 3.0 * TRIANGLE_HEIGHT};
 
+    // Initialize slit array with zeros
+    for (int i = 0; i < np; i++) {
+        for (int j = 0; j < np; j++) {
+            slit[i][j] = 0;
+        }
+    }
+
+    // Iterate over the grid points
+    for (int nn1 = 0; nn1 < np; nn1++) {
+        for (int nn2 = 0; nn2 < np; nn2++) {
+            // Compute vectors v0, v1, and v2
+            double v0[2] = {vertex3[0] - vertex1[0], vertex3[1] - vertex1[1]};
+            double v1[2] = {vertex2[0] - vertex1[0], vertex2[1] - vertex1[1]};
+            double v2[2] = {nn1 - vertex1[0] + 1, nn2 - vertex1[1] + 1};
+
+            // Dot products
+            double dot00 = v0[0] * v0[0] + v0[1] * v0[1];
+            double dot01 = v0[0] * v1[0] + v0[1] * v1[1];
+            double dot02 = v0[0] * v2[0] + v0[1] * v2[1];
+            double dot11 = v1[0] * v1[0] + v1[1] * v1[1];
+            double dot12 = v1[0] * v2[0] + v1[1] * v2[1];
+
+
+            // Compute barycentric coordinates u and v
+            double invDenom = 1.0 / (dot00 * dot11 - dot01 * dot01);
+            double u = (dot11 * dot02 - dot01 * dot12) * invDenom;
+            double v = (dot00 * dot12 - dot01 * dot02) * invDenom;
+
+//             Check if point is inside the triangle
+            if (u >= 0 && v >= 0 && (u + v) < 1) {
+                slit[nn1][nn2] = 1;  // Mark as inside
+            }
+        }
+    }
+
+//    // Apply the slit mask to the electric field (element-wise multiplication)
+//    for (int i = 0; i < np; i++) {
+//        for (int j = 0; j < np; j++) {
+//            E[i][j] *= slit[i][j];
+//        }
+//    }
+}
