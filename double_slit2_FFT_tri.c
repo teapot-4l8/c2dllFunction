@@ -2,6 +2,7 @@
 #include <math.h>
 #include <stdlib.h>
 #include <complex.h>  // For handling complex numbers
+#include <fftw3.h>    // FFTW library for FFT
 
 // Constants
 #define wL 550e-9  // wavelength
@@ -14,10 +15,11 @@
 #define m1 1       // vortex beam indicator (0 for Gaussian, non-zero for vortex)
 #define TRIANGLE_HEIGHT 50  // Height of the triangle
 
+// Helper function to initialize a 2D array dynamically
 double** create_2d_array(int rows, int cols);
 
 // Function to calculate and apply the triangular slit mask
-void calculate_triangular_slit(double** slit , double complex E[np][np]);
+void calculate_triangular_slit(double** slit ,  double complex **E);
 
 
 int main() {
@@ -29,6 +31,20 @@ int main() {
     double **yp = create_2d_array(np, np);
     double **zp = create_2d_array(np, np);
     double **slit = create_2d_array(np, np);
+
+    // Create dynamic arrays for E and intensity
+    double complex **E = (double complex **)malloc(np * sizeof(double complex *));
+    for (int i = 0; i < np; i++) {
+        E[i] = (double complex *)malloc(np * sizeof(double complex));
+    }
+    double **intensity = create_2d_array(np, np);
+
+    double complex **intensity_fft = (double complex **)malloc(np * sizeof(double complex *));
+    for (int i = 0; i < np; i++) {
+        intensity_fft[i] = (double complex *)malloc(np * sizeof(double complex));
+    }
+
+
     // Initialize xp, yp, zp
     for (int c = 0; c < np; c++) {
         double p = pmin + dp * c;
@@ -44,7 +60,7 @@ int main() {
     double w1[np][np];
     double phi1[np][np];
     double rho1[np][np];
-    double complex E[np][np]; // To store the result of E (complex)
+//    double complex E[np][np]; // To store the result of E (complex)
 
 
     double thetaX1 = atan(S1x / (2 * zSP));
@@ -83,7 +99,14 @@ int main() {
     }
 
     calculate_triangular_slit(slit, E);
-
+    // Calculate intensity
+//    double intensity[np][np];
+    for (int i = 0; i < np; i++) {
+        for (int j = 0; j < np; j++) {
+            intensity[i][j] = cabs(E[i][j]) * cabs(E[i][j]);  // Calculate intensity as |E|^2
+//            printf("for debug");
+        }
+    }
 
 
 
@@ -91,6 +114,9 @@ int main() {
     free(yp);
     free(zp);
     free(slit);
+    free(E);
+    free(intensity);
+    free(intensity_fft);
     return 0;
 }
 
@@ -104,8 +130,10 @@ double** create_2d_array(int rows, int cols) {
     return array;
 }
 
+
+
 // Function to calculate and apply the triangular slit mask
-void calculate_triangular_slit(double** slit , double complex E[np][np]) {
+void calculate_triangular_slit(double** slit ,  double complex **E) {
     double center_x = np / 2.0;
     double center_y = np / 2.0;
 
@@ -141,17 +169,19 @@ void calculate_triangular_slit(double** slit , double complex E[np][np]) {
             double u = (dot11 * dot02 - dot01 * dot12) * invDenom;
             double v = (dot00 * dot12 - dot01 * dot02) * invDenom;
 
-//             Check if point is inside the triangle
+            // Check if point is inside the triangle
             if (u >= 0 && v >= 0 && (u + v) < 1) {
                 slit[nn1][nn2] = 1;  // Mark as inside
             }
         }
     }
 
-//    // Apply the slit mask to the electric field (element-wise multiplication)
-//    for (int i = 0; i < np; i++) {
-//        for (int j = 0; j < np; j++) {
-//            E[i][j] *= slit[i][j];
-//        }
-//    }
+    // Apply the slit mask to the electric field (element-wise multiplication)
+    for (int i = 0; i < np; i++) {
+        for (int j = 0; j < np; j++) {
+            E[i][j] *= slit[i][j];
+//            printf("debug");
+        }
+    }
+//    printf("debug...");
 }
